@@ -9,12 +9,14 @@ class Server
         $this->serv = new swoole_server('0.0.0.0', 9501, SWOOLE_PROCESS, SWOOLE_SOCK_TCP);
 
         $this->serv->set([
-            'reactor_num'   => 20,
-            'worker_num'    => 20,
-            'max_request'   => 10000,
+            'reactor_num'   => 12,
+            'worker_num'    => 16,
+//            'max_request'   => 10000,
             'max_conn'      => 1000,
             'dispatch_mode' => 1,
-            'task_worker_num'=> 20
+            'task_worker_num'=> 400,
+            'task_ipc_mode' =>  3,
+            'daemonize' =>  1,
         ]);
 
         $this->serv->on('Receive', [$this, 'onReceive']);
